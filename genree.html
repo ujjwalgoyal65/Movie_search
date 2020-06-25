@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	 <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="js/genree.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+  <style>
+
+#clearfix {
+  overflow: auto;
+}
+
+.img2 {
+  float: right;
+}
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+}
+
+.pagination a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+</style>
+
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a  href="index.html"><img src="images/logo.png" style="width: 70px;"></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="index.html">Movie Search</a></li>
+      
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+    	<li ><a href="index.html">By Name</a></li>
+    	<li ><a href="year.html">By year</a></li>
+    	<li class="active"><a href="genree.html">Genre</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+ <div id="clearfix" class="container" style="border:3px solid black; width: 900px; padding: 10px;">
+ <form>
+  <div class="form-group" >
+      Genre:
+      <input type="text"  id="gnrr">
+      <input type="button" name="search" id="sub1" class="btn btn-default" value="search" onclick=run12(document.getElementById("gnrr").value)>
+    
+    </div>
+</div>
+<div class="container">
+	<h1>Movies By Genre</h1>
+	<div class="row" >
+  <div class="col-sm-4" >
+  	<div class="thumbnail">
+        <a href="#" target="_blank">
+          <img id="pic10" src="#" alt="Lights" style="width:100%;height: 200px;">
+          <div class="caption" id="d[0]" style="height: 90px;">
+           
+          </div>
+        </a>
+      </div>
+  </div>
+  <div class="col-sm-4">
+  	<div class="thumbnail">
+        <a href="#" target="_blank">
+          <img id="pic11" src="#" alt="Lights" style="width:100%;height: 200px;">
+          <div class="caption" id="d[1]" style="height: 90px;">
+            
+          </div>
+        </a>
+      </div>
+  </div>
+  <div class="col-sm-4">
+  	<div class="thumbnail">
+        <a href="#" target="_blank">
+          <img id="pic12" src="#" alt="Lights" style="width:100%;height: 200px;">
+          <div class="caption" id="d[2]" style="height: 90px;">
+           
+          </div>
+        </a>
+      </div>
+    </div>
+    <br><br>
+  <div class="col-sm-4" >
+    <div class="thumbnail">
+        <a href="#" target="_blank">
+          <img id="pic13" src="#" alt="Lights" style="width:100%;height: 200px;">
+          <div class="caption" id="d[3]" style="height: 90px;">
+           
+          </div>
+        </a>
+      </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="thumbnail">
+        <a href="#" target="_blank">
+          <img id="pic14" src="#" alt="Lights" style="width:100%;height: 200px;">
+          <div class="caption" id="d[4]" style="height: 90px;">
+            
+          </div>
+        </a>
+      </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="thumbnail">
+        <a href="#" target="_blank">
+          <img id="pic15" src="#" alt="Lights" style="width:100%;height: 200px;">
+          <div class="caption" id="d[5]" style="height: 90px;">
+           
+          </div>
+        </a>
+      </div>
+  </div>
+</div>
+</div>
+<center>
+  <div class="pagination">
+  <a href="#">&laquo;</a>
+  <a id="a1" href="#" class="active" onclick=run12(document.getElementById("gnrr").value)>1</a>
+  <a id="a2" class=" " href="#" onclick=run21(document.getElementById("gnrr").value)>2</a>
+  <a id="a3" class=" " href="#" onclick=run41(document.getElementById("gnrr").value)>3</a>
+  <a href="#">&raquo;</a>   
+</div>
+</center>
+<script >
+	function run12(a) {
+		
+	//var t1=document.getElementById("gnrr").value;
+	$.get("https://api.themoviedb.org/3/genre/movie/list?api_key=54b2b3229745cf87be86c79703a78b4f",function(rawdata3){
+    for (var i = 0; i < 19; i++) {
+        if(a==rawdata3.genres[i].name){
+          var t2=rawdata3.genres[i].id;
+        }
+       }
+       run2(t2);
+     })
+}
+  $.get("https://api.themoviedb.org/3/discover/movie?api_key=54b2b3229745cf87be86c79703a78b4f&sort_by=popularity.desc&page=1&with_genres=10749",function(rawdata1){
+
+    var pics=[6];
+    for (var i = 0; i < 6; i++) {
+       pics[i]=rawdata1.results[i].poster_path;
+       }
+       var title=[6];
+       var rate=[6];
+       for (var i = 0; i < 6; i++) {
+          title[i]=rawdata1.results[i].title;
+          rate[i]=rawdata1.results[i].vote_average;
+       }
+       for (var i = 1; i <=6; i++) {
+         
+      document.images[i].src="https://image.tmdb.org/t/p/w342/"+pics[i-1];
+     
+      }
+       document.getElementById("d[0]").innerHTML="<h5> Title:  "+title[0]+" <br/> Rating:  "+rate[0]+"</h5> ";
+       document.getElementById("d[1]").innerHTML="<h5> Title:  "+title[1]+" <br/> Rating:  "+rate[1]+"</h5> ";
+       document.getElementById("d[2]").innerHTML="<h5> Title:  "+title[2]+" <br/> Rating:  "+rate[2]+"</h5> ";
+       document.getElementById("d[3]").innerHTML="<h5> Title:  "+title[3]+" <br/> Rating:  "+rate[3]+"</h5> ";
+       document.getElementById("d[4]").innerHTML="<h5> Title:  "+title[4]+" <br/> Rating:  "+rate[4]+"</h5> ";
+       document.getElementById("d[5]").innerHTML="<h5> Title:  "+title[5]+" <br/> Rating:  "+rate[5]+"</h5> ";
+
+    })
+  
+  function run2(t){
+    $.get("https://api.themoviedb.org/3/discover/movie?api_key=54b2b3229745cf87be86c79703a78b4f&sort_by=popularity.desc&page=1&with_genres="+t+"",function(rawdata1){
+
+    var pics=[6];
+    for (var i = 0; i < 6; i++) {
+       pics[i]=rawdata1.results[i].poster_path;
+       }
+       var title=[6];
+       var rate=[6];
+       for (var i = 0; i < 6; i++) {
+          title[i]=rawdata1.results[i].title;
+          rate[i]=rawdata1.results[i].vote_average;
+       }
+       for (var i = 1; i <=6; i++) {
+         
+      document.images[i].src="https://image.tmdb.org/t/p/w342/"+pics[i-1];
+     
+      }
+       document.getElementById("d[0]").innerHTML="<h5> Title:  "+title[0]+" <br/> Rating:  "+rate[0]+"</h5> ";
+       document.getElementById("d[1]").innerHTML="<h5> Title:  "+title[1]+" <br/> Rating:  "+rate[1]+"</h5> ";
+       document.getElementById("d[2]").innerHTML="<h5> Title:  "+title[2]+" <br/> Rating:  "+rate[2]+"</h5> ";
+       document.getElementById("d[3]").innerHTML="<h5> Title:  "+title[3]+" <br/> Rating:  "+rate[3]+"</h5> ";
+       document.getElementById("d[4]").innerHTML="<h5> Title:  "+title[4]+" <br/> Rating:  "+rate[4]+"</h5> ";
+       document.getElementById("d[5]").innerHTML="<h5> Title:  "+title[5]+" <br/> Rating:  "+rate[5]+"</h5> ";
+
+    })
+  }
+   $("#a2").click(function(){
+      $("#a1").removeClass("active");
+      $("#a3").removeClass("active");
+    $("#a2").addClass("active");
+    })
+    $("#a1").click(function(){
+      $("#a2").removeClass("active");
+      $("#a3").removeClass("active");
+    $("#a1").addClass("active");
+    })
+    $("#a3").click(function(){
+      $("#a1").removeClass("active");
+      $("#a2").removeClass("active");
+    $("#a3").addClass("active");
+    })
+	</script>
+</body>
+</html>

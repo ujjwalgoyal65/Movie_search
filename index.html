@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	 <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+
+#clearfix {
+  overflow: auto;
+}
+
+.img2 {
+  float: right;
+}
+
+</style>
+
+</head>
+<body >
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+     <a  href="index.html"><img src="images/logo.png" style="width: 70px;"></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="index.html">Movie Search</a></li>
+      
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+    	<li class="active"><a href="#">By Name</a></li>
+    	<li><a href="year.html">By year</a></li>
+    	<li><a href="genree.html">Genre</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+ <div id="clearfix" class="container" style="border:2px solid black; width: 900px; padding: 10px;">
+  <img class="img2" id="i1" src="images/default.jpg" width="150" height="170" style="border:2px solid black;">
+  <form>
+  <div class="form-group"  >
+      Title:
+      <input type="text"  id="usr" placeholder="title">
+      <input type="button" name="search" id="sub" class="btn btn-default" value="search" onclick="run()">
+    </div>
+    <div class="form-group">
+     Type:
+      <input type="text" id="tpe" name="tpe" placeholder="movie/series" disabled>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+
+       Genre:
+      <input type="text" id="gnr" placeholder="Action/Comedy.." disabled>
+      <br><br>
+      Language:
+      <input type="text" id="lng" placeholder="Hindi/English" disabled>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+Year:
+      <input type="text" id="yrs" placeholder="Ex: 2019" disabled>
+   <br><br>
+ IMDb ratng:
+      <input type="text" id="rate" placeholder="Ex: 8.9 " disabled>
+ <br>
+ <br>
+ <div class="form-group">
+  Plot:
+  <textarea class="form-control"  id="plot" placeholder="Overview" disabled></textarea>
+</div>
+    </div>
+</div>
+<div class="container-fluid">
+	<h1>Trending Movies</h1>
+	<div class="row" >
+  <div class="col-sm-3" style=" height: 100px;">
+  	<div class="thumbnail">
+        <a href="#" target="_blank">
+          <img id="pic1" src="#" alt="Lights" style="width:80%;height: 300px;">
+          <div class="caption" id="d1">
+          </div>
+        </a>
+      </div>
+  </div>
+  <div class="col-sm-3">
+  	<div class="thumbnail">
+        <a href="#" target="_blank">
+          <img id="pic2" src="#" alt="Lights" style="width:80%; height: 300px;">
+          <div class="caption" id="d2">
+          </div>
+        </a>
+      </div>
+  </div>
+  <div class="col-sm-3">
+  	<div class="thumbnail">
+        <a href="#" target="_blank">
+          <img id="pic3" src="#" alt="Lights" style="width:80% ;height: 300px;">
+          <div class="caption" id="d3">
+          </div>
+        </a>
+      </div>
+  </div>
+   <div class="col-sm-3">
+   	<div class="thumbnail">
+        <a href="#" target="_blank">
+          <img  id="pic4" src="#" alt="Lights" style="width:80% ;height: 300px;">
+          <div class="caption" id="d4"> 
+          </div>
+        </a>
+      </div>
+   </div>
+</div>
+</div>
+<script>
+    function run() {
+		
+        var t1=document.getElementById("usr").value;
+        $.get("https://www.omdbapi.com/?t="+t1+"&apikey=17acb676",function(rawdata){
+            var type1=rawdata.Type;
+            var lng=rawdata.Language;
+            var yrs=rawdata.Year;
+            var rate=rawdata.imdbRating;
+            var gnr=rawdata.Genre;
+            var plot=rawdata.Plot;
+            var pic1=rawdata.Poster;
+             document.getElementById('tpe').value=type1;
+              document.getElementById('yrs').value=yrs;
+               document.getElementById('lng').value=lng;
+                document.getElementById('rate').value=rate;
+                 document.getElementById('gnr').value=gnr;
+                  document.getElementById('plot').value=plot;
+                document.getElementById('i1').src=pic1;
+    
+                    });
+           
+            }
+    
+        $.get("https://api.themoviedb.org/3/trending/movie/day?api_key=54b2b3229745cf87be86c79703a78b4f",function(raw1){
+    
+    
+    
+            var pic1=raw1.results[0].poster_path;
+            var dis1=raw1.results[0].title;
+             var link="https://image.tmdb.org/t/p/w342/"+pic1;
+             document.getElementById('pic1').src=link;
+             document.getElementById('d1').innerHTML="<h3>"+ dis1+" </h3>";
+              var pic2=raw1.results[1].poster_path;
+               var dis2=raw1.results[1].title;
+             var link2="https://image.tmdb.org/t/p/w342/"+pic2;
+             document.getElementById('pic2').src=link2;
+             document.getElementById('d2').innerHTML="<h3>"+ dis2+" </h3>";
+              var pic3=raw1.results[2].poster_path;
+               var dis3=raw1.results[2].title;
+             var link3="https://image.tmdb.org/t/p/w342/"+pic3;
+             document.getElementById('pic3').src=link3;
+             document.getElementById('d3').innerHTML="<h3>"+ dis3+" </h3>";
+              var pic4=raw1.results[3].poster_path;
+               var dis4=raw1.results[3].title;
+             var link4="https://image.tmdb.org/t/p/w342/"+pic4;
+             document.getElementById('pic4').src=link4;
+             document.getElementById('d4').innerHTML="<h3>"+ dis4+" </h3>";
+        })
+</script>
+</body> 		     
+</html>
