@@ -1,0 +1,24 @@
+body{
+	background-color: rgb(35,77,85);
+}
+
+#clearfix {
+  overflow: auto;
+  width: 900px; 
+  padding: 10px;
+  background-color:#6F8A83;
+}
+
+#i1 {
+	border:2px solid black;
+}
+
+input
+{
+	background-color:white;
+}
+
+.thumbnail {
+	background-color:rgb(192,192,192);
+	border:5px solid black;
+}
