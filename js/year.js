@@ -27,9 +27,9 @@ function run11() {
 
     })
   }
-  function run2(a) {
+  function run2() {
     
-  //var t1=document.getElementById("yrss").value;
+  var a=document.getElementById("yrss").value;
   $.get("https://api.themoviedb.org/3/discover/movie?api_key=54b2b3229745cf87be86c79703a78b4f&sort_by=popularity.desc&page=1&year="+a+"",function(rawdata1){
    //alert(a);
     var pics=[6];
@@ -57,9 +57,9 @@ function run11() {
 
     })
   }
-  function run31(a) {
+  function run31() {
     
-  //var t1=document.getElementById("yrss").value;
+  var a=document.getElementById("yrss").value;
   $.get("https://api.themoviedb.org/3/discover/movie?api_key=54b2b3229745cf87be86c79703a78b4f&sort_by=popularity.desc&page=1&year="+a+"",function(rawdata1){
    //alert(a);
     var pics=[6];

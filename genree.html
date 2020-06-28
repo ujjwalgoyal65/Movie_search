@@ -8,31 +8,8 @@
     <script src="js/genree.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  
-  <style>
-
-#clearfix {
-  overflow: auto;
-}
-
-.img2 {
-  float: right;
-}
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color .3s;
-}
-
-.pagination a.active {
-  background-color: dodgerblue;
-  color: white;
-}
-
-.pagination a:hover:not(.active) {background-color: #ddd;}
-</style>
+   <script src="js/genree.js"></script>
+  <link rel="stylesheet" href="cs/style.css">
 
 </head>
 <body>
@@ -54,12 +31,12 @@
     </ul>
   </div>
 </nav>
- <div id="clearfix" class="container" style="border:3px solid black; width: 900px; padding: 10px;">
+ <div id="clearfix" class="container">
  <form>
   <div class="form-group" >
       Genre:
       <input type="text"  id="gnrr">
-      <input type="button" name="search" id="sub1" class="btn btn-default" value="search" onclick=run12(document.getElementById("gnrr").value)>
+      <input type="button" name="search" id="sub1" class="btn btn-default" value="search" onclick=run12()>
     
     </div>
 </div>
@@ -132,19 +109,19 @@
 <center>
   <div class="pagination">
   <a href="#">&laquo;</a>
-  <a id="a1" href="#" class="active" onclick=run12(document.getElementById("gnrr").value)>1</a>
-  <a id="a2" class=" " href="#" onclick=run21(document.getElementById("gnrr").value)>2</a>
-  <a id="a3" class=" " href="#" onclick=run41(document.getElementById("gnrr").value)>3</a>
+  <a id="a1" href="#" class="active" onclick=run12()>1</a>
+  <a id="a2" class=" " href="#" onclick=run21()>2</a>
+  <a id="a3" class=" " href="#" onclick=run41()>3</a>
   <a href="#">&raquo;</a>   
 </div>
 </center>
 <script >
-	function run12(a) {
+	function run12() {
 		
-	//var t1=document.getElementById("gnrr").value;
+	var a=document.getElementById("gnrr").value;
 	$.get("https://api.themoviedb.org/3/genre/movie/list?api_key=54b2b3229745cf87be86c79703a78b4f",function(rawdata3){
     for (var i = 0; i < 19; i++) {
-        if(a==rawdata3.genres[i].name){
+        if(a.toLowerCase()==rawdata3.genres[i].name.toLowerCase()){
           var t2=rawdata3.genres[i].id;
         }
        }

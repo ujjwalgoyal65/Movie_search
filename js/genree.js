@@ -1,9 +1,10 @@
-function run21(a) {
+
+function run21() {
 		
-	//var t1=document.getElementById("gnrr").value;
+	var a=document.getElementById("gnrr").value;
 	$.get("https://api.themoviedb.org/3/genre/movie/list?api_key=54b2b3229745cf87be86c79703a78b4f",function(rawdata3){
     for (var i = 0; i < 19; i++) {
-        if(a==rawdata3.genres[i].name){
+        if(a.toLowerCase()==rawdata3.genres[i].name.toLowerCase()){
           var t2=rawdata3.genres[i].id;
         }
        }
@@ -37,12 +38,12 @@ function run22(t){
 
     })
   }
-  function run41(a) {
+  function run41() {
     
-  //var t1=document.getElementById("gnrr").value;
+  var a=document.getElementById("gnrr").value;
   $.get("https://api.themoviedb.org/3/genre/movie/list?api_key=54b2b3229745cf87be86c79703a78b4f",function(rawdata3){
     for (var i = 0; i < 19; i++) {
-        if(a==rawdata3.genres[i].name){
+        if(a.toLowerCase()==rawdata3.genres[i].name.toLowerCase()){
           var t2=rawdata3.genres[i].id;
         }
        }
